@@ -36,6 +36,14 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function ProductDetailPage() {
-  return <ProductDetailClient />;
+export default async function ProductDetailPage({ params }) {
+  try {
+    const response = await getProductById(params.id);
+    if (response.success) {
+      return <ProductDetailClient product={response.data} />;
+    }
+  } catch (error) {
+    console.error('Error fetching product:', error);
+  }
+  return <ProductDetailClient product={null} />;
 } 

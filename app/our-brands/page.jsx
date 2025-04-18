@@ -140,7 +140,7 @@ export default function BrandsPage() {
     {
       title: "Premium Wheels",
       description: "Experience unmatched quality and performance",
-      image: "/new/CruiserAlloy-918MB-1.jpg",
+      image: "/new/Falcon Wheel-min.jpg",
       icon: <FiTruck className="w-8 h-8" />,
       features: [
         "Forged Alloy Wheels",
@@ -157,7 +157,7 @@ export default function BrandsPage() {
     {
       title: "Commercial Wheels",
       description: "Built for heavy-duty performance",
-      image: "/new/OIP (1).jpeg",
+      image: "/new/whiteallow.jpg",
       icon: <FiPackage className="w-8 h-8" />,
       features: [
         "Steel Wheels",

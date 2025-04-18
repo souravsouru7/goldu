@@ -122,6 +122,7 @@ export default function ProductsPage() {
         router.push('/products/wheels');
         break;
       case 'BATTERIES':
+      case 'UPS BATTERIES':
         router.push('/products/batteries');
         break;
       default:
@@ -204,7 +205,7 @@ export default function ProductsPage() {
           />
         </div>
 
-        <div className="relative mb-32 md:mb-48 w-full max-w-[100vw] overflow-hidden">
+        <div className="relative mb-16 md:mb-24 w-full max-w-[100vw] overflow-hidden">
           <div className="w-full relative">
             <div className="absolute inset-0 bg-black/20 mix-blend-multiply z-10 rounded-3xl mx-auto max-w-7xl" />
             <img 
@@ -223,7 +224,7 @@ export default function ProductsPage() {
                   height={300}
                   loading="lazy"
                   placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLzYvLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLz/2wBDAR0dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dLz/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLzYvLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLz/2wBDAR0dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dLz/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                   className="object-cover rounded-lg"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
@@ -264,7 +265,7 @@ export default function ProductsPage() {
         </div>
 
         <motion.div 
-          className="relative z-30 container mx-auto px-4 mb-16 sm:mb-24"
+          className="relative z-30 container mx-auto px-4 mb-8 sm:mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -309,7 +310,7 @@ export default function ProductsPage() {
         </motion.div>
 
         <motion.div 
-          className="py-16 md:py-24 px-4 mb-16 md:mb-24 relative overflow-hidden z-20"
+          className="py-8 md:py-12 px-4 mb-8 md:mb-12 relative overflow-hidden z-20"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -409,7 +410,7 @@ export default function ProductsPage() {
         </motion.div>
 
         <motion.div 
-          className="py-12 px-4 relative overflow-hidden"
+          className="py-8 px-4 relative overflow-hidden"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -694,7 +695,7 @@ export default function ProductsPage() {
         </motion.div>
         
         <motion.div 
-          className="relative py-12"
+          className="relative py-8 md:py-12 px-4 mb-8 md:mb-12 relative overflow-hidden z-20"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -759,7 +760,7 @@ export default function ProductsPage() {
         </motion.div>
 
         {/* Product Categories Overview */}
-        <div className="relative z-10 py-12 sm:py-20">
+        <div className="relative z-10 py-8 sm:py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-7xl mx-auto">
               {/* Wheels Section */}
@@ -1191,7 +1192,7 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        <div id="products" className="container mx-auto px-4 py-16 relative z-10">
+        <div id="products" className="container mx-auto px-4 py-8 relative z-10">
           <motion.div
             className="mb-12 text-center"
             initial={{ opacity: 0, y: 20 }}

@@ -48,7 +48,7 @@ const Footer = () => {
     },
     { 
       icon: FaWhatsapp, 
-      text: 'WhatsApp',
+      text: '971586498398',
       href: 'https://wa.me/971586498398',
       isEmoji: false
     }
@@ -161,7 +161,7 @@ const Footer = () => {
                 </div>
                 {[
                   { name: 'About Us', path: '/about-us' },
-                  { name: 'our Brands', path: '/our-brands' },
+                  { name: 'Our-Brands', path: '/our-brands' },
                   { name: 'Contact', path: '/ConductUs' },
                 ].map((link, index) => (
                   <motion.div
