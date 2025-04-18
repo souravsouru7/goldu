@@ -215,8 +215,8 @@ export default function ProductsPage() {
               style={{ objectPosition: 'center center' }}
             />
             
-            <div className="absolute bottom-[-120px] right-[10%] z-20 hidden md:block">
-              <div className="relative overflow-hidden rounded-2xl shadow-2xl h-[300px] w-[400px]">
+            <div className="absolute bottom-[-120px] right-[10%] z-20 hidden md:block w-[400px] h-[300px]">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl h-[300px] w-[400px] aspect-[4/3]">
                 <Image
                   src="/new/img2.jpg"
                   alt="Featured Product"
@@ -224,7 +224,7 @@ export default function ProductsPage() {
                   height={300}
                   loading="lazy"
                   placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLzYvLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLz/2wBDAR0dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dLz/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLzYvLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLz/2wBDAR0dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dLz/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                   className="object-cover rounded-lg"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
@@ -265,7 +265,7 @@ export default function ProductsPage() {
         </div>
 
         <motion.div 
-          className="relative z-30 container mx-auto px-4 mb-8 sm:mb-12"
+          className="relative z-30 container mx-auto px-4 mb-8 sm:mb-12 max-w-7xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -288,7 +288,7 @@ export default function ProductsPage() {
               </h3>
               <div className="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500"></div>
             </div>
-            <div className="flex flex-wrap sm:flex-nowrap justify-center items-center gap-4 sm:gap-6 md:gap-12">
+            <div className="flex flex-wrap sm:flex-nowrap justify-center items-center gap-4 sm:gap-6 md:gap-12 w-full">
               {['TYRES', 'WHEELS', 'BATTERIES'].map((category) => (
                 <motion.div
                   key={category}
@@ -300,7 +300,7 @@ export default function ProductsPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: category === 'TYRES' ? 0.1 : category === 'WHEELS' ? 0.2 : 0.3 }}
                 >
-                  <div className="rounded-xl px-4 sm:px-8 py-3 sm:py-5 w-full sm:w-40 text-center font-bold shadow-lg transition-all duration-300 bg-white text-gray-800 hover:bg-gradient-to-r hover:from-amber-500 hover:to-orange-500 hover:text-white hover:shadow-xl">
+                  <div className="rounded-xl px-4 sm:px-8 py-3 sm:py-5 w-full sm:w-40 text-center font-bold shadow-lg transition-all duration-300 bg-white text-gray-800 hover:bg-gradient-to-r hover:from-amber-500 hover:to-orange-500 hover:text-white hover:shadow-xl min-w-[120px]">
                     {category}
                   </div>
                 </motion.div>
@@ -323,7 +323,7 @@ export default function ProductsPage() {
           
           <div className="container mx-auto relative z-10">
             <motion.div
-              className="absolute right-0 top-0 md:w-1/2 w-full h-full opacity-20 md:opacity-100 hidden md:block"
+              className="absolute right-0 top-0 md:w-1/2 w-full h-full opacity-20 md:opacity-100 hidden md:block aspect-square"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -338,7 +338,7 @@ export default function ProductsPage() {
               />
             </motion.div>
             
-            <div className="md:max-w-2/3 relative">
+            <div className="md:max-w-[45%] relative">
               <motion.h2 
                 className="text-4xl md:text-6xl font-bold mb-6 md:mb-10 bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-orange-600"
                 initial={{ opacity: 0, y: 30 }}
@@ -348,7 +348,7 @@ export default function ProductsPage() {
               >
                 FALCON BATTERIES
               </motion.h2>
-              <div className="max-w-xl md:max-w-2xl">
+              <div className="max-w-xl">
                 <motion.p 
                   className="text-gray-600 text-base md:text-xl leading-relaxed mb-6 md:mb-10"
                   initial={{ opacity: 0, y: 20 }}
@@ -359,10 +359,7 @@ export default function ProductsPage() {
                   Falcon Batteries – Powering Bikes and UPS Systems with Reliability Golden Extreme 
                   Trading offers Falcon Batteries, known for their superior performance and reliability. Our 
                   range includes high-quality bike batteries that deliver consistent starting power and long-lasting 
-                  performance, ensuring a smooth ride in all conditions. We also provide Falcon UPS 
-                  batteries, designed to offer uninterrupted power supply for critical systems, providing 
-                  dependable backup during outages. Whether for bikes or UPS systems, Falcon Batteries are 
-                  built to meet your power needs with durability and efficiency.
+                  performance, ensuring a smooth ride in all conditions.
                 </motion.p>
                 
                 <motion.div 

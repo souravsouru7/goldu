@@ -174,7 +174,7 @@ export default function BrandsPage() {
     {
       title: "Custom Series",
       description: "Personalized to your style",
-      image: "/new/OIP.jpeg",
+      image: "/new/wheel3.jpg",
       icon: <FiStar className="w-8 h-8" />,
       features: [
         "Custom Designs",
