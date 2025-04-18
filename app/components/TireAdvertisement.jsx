@@ -62,7 +62,6 @@ const TireAdvertisement = () => {
       logoAlt: 'BF Goodrich logo',
       imageSrc: '/new/bf-min.png',
       imageAlt: 'BF Goodrich Tire',
-      logoClass: 'h-16 w-auto object-contain',
       color: 'from-blue-600 to-blue-800'
     },
     {
@@ -350,11 +349,11 @@ const TireAdvertisement = () => {
                   <img 
                     src={product.logoSrc} 
                     alt={product.logoAlt} 
-                    className={product.logoClass || 'h-16 w-auto object-contain'}
+                    className="h-20 w-40 object-contain"
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = '/logo.png';
-                      e.target.className = 'h-12 w-auto object-contain opacity-50';
+                      e.target.className = 'h-20 w-40 object-contain opacity-50';
                     }}
                   />
                 </div>
