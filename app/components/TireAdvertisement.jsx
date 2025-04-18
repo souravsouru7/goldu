@@ -50,7 +50,7 @@ const TireAdvertisement = () => {
   const staticProducts = [
     {
       id: 'appolo',
-      logoSrc: '/new/apollo.png',
+      logoSrc: '/new/Apollo.png',
       logoAlt: 'Apollo logo',
       imageSrc: '/new/appolo-min.png',
       imageAlt: 'Apollo Tyre',
