@@ -85,7 +85,7 @@ const Footer = () => {
         </div>
 
         {/* Main Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-8">
           {/* Company Info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -111,7 +111,6 @@ const Footer = () => {
                     href={social.href}
                     className="p-3 rounded-full transition-all duration-300"
                     style={{
-                      backgroundColor: `${social.color}10`,
                       color: social.color
                     }}
                   >
@@ -220,7 +219,7 @@ const Footer = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mt-12 pt-6 border-t border-gray-200"
+          className="mt-8 pt-6 border-t border-gray-200"
         >
           <div className="text-center">
             <p className="text-xs text-gray-500 mt-2">
