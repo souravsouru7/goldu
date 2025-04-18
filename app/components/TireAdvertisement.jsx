@@ -58,7 +58,7 @@ const TireAdvertisement = () => {
     },
     {
       id: 'bf-goodrich',
-      logoSrc: '/new/bf-goodrich-logo.png',
+      logoSrc: '/new/bggood.png',
       logoAlt: 'BF Goodrich logo',
       imageSrc: '/new/bf-min.png',
       imageAlt: 'BF Goodrich Tire',
