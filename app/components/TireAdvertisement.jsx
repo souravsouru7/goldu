@@ -66,7 +66,7 @@ const TireAdvertisement = () => {
     },
     {
       id: 'marshall',
-      logoSrc: '/new/Michelin.png',
+      logoSrc: '/new/logo-marshal[1].png',
       logoAlt: 'Michelin logo',
       imageSrc: '/new/marshall-min.png',
       imageAlt: 'Marshall Tire',

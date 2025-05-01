@@ -207,6 +207,20 @@ const HeroBanner = () => {
                 >
                   {slides[currentSlide].subtitle}
                 </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                >
+                  <button
+                    onClick={() => router.push(slides[currentSlide].link)}
+                    className="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-medium text-white bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  >
+                    <span className="mr-2">{slides[currentSlide].cta}</span>
+                    <FiArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </button>
+                </motion.div>
               </div>
             </div>
           </div>

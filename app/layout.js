@@ -1,6 +1,7 @@
 import "./globals.css";
 import ScrollToTop from './components/ScrollToTop';
 import FloatingContactIcons from './components/FloatingContactIcons';
+import LoadingScreen from './components/LoadingScreen';
 
 export const metadata = {
   title: "Golden Extreme Auto Spare Parts",
@@ -15,7 +16,10 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/logo.png" />
       </head>
       <body className="antialiased">
-        {children}
+        <main>
+          <LoadingScreen />
+          {children}
+        </main>
         <ScrollToTop />
         <FloatingContactIcons />
       </body>

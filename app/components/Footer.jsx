@@ -48,7 +48,7 @@ const Footer = () => {
     },
     { 
       icon: FaWhatsapp, 
-      text: '971586498398',
+      text: '+971586498398',
       href: 'https://wa.me/971586498398',
       isEmoji: false
     }
