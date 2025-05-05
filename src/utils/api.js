@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://69.62.79.5:3000/api';
 console.log('API Base URL:', BASE_URL); // Log the base URL to help with debugging
 
 export const loginAdmin = async (username, password) => {
