@@ -295,3 +295,141 @@ export const submitContactForm = async (formData) => {
     throw new Error(error.message || 'Failed to submit form');
   }
 };
+
+export const createEvent = async (formData) => {
+  const token = localStorage.getItem('adminToken');
+  try {
+    const response = await fetch(`${BASE_URL}/events`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error);
+    return data;
+  } catch (error) {
+    throw new Error(error.message || 'Failed to create event');
+  }
+};
+
+export const getEvents = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/events`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      mode: 'cors',
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      return {
+        success: false,
+        error: errorData.error || 'Failed to fetch events',
+        data: []
+      };
+    }
+
+    const data = await response.json();
+    return {
+      success: true,
+      data: data.data || [],
+      error: null
+    };
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    return {
+      success: false,
+      data: [],
+      error: error.message || 'Failed to fetch events'
+    };
+  }
+};
+
+export const getEventById = async (id) => {
+  try {
+    if (!id) {
+      return {
+        success: false,
+        error: 'Event ID is required',
+        data: null
+      };
+    }
+
+    const response = await fetch(`${BASE_URL}/events/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      mode: 'cors',
+      credentials: 'include'
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      return {
+        success: false,
+        error: errorData.error || 'Failed to fetch event',
+        data: null
+      };
+    }
+
+    const data = await response.json();
+    return {
+      success: true,
+      data: data.data,
+      error: null
+    };
+  } catch (error) {
+    console.error('Error in getEventById:', error);
+    return {
+      success: false,
+      error: error.message || 'Failed to fetch event',
+      data: null
+    };
+  }
+};
+
+export const updateEvent = async (id, formData) => {
+  const token = localStorage.getItem('adminToken');
+  try {
+    const response = await fetch(`${BASE_URL}/events/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error);
+    return data;
+  } catch (error) {
+    throw new Error(error.message || 'Failed to update event');
+  }
+};
+
+export const deleteEvent = async (id) => {
+  const token = localStorage.getItem('adminToken');
+  try {
+    const response = await fetch(`${BASE_URL}/events/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error);
+    return data;
+  } catch (error) {
+    throw new Error(error.message || 'Failed to delete event');
+  }
+};

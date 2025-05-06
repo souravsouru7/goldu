@@ -7,6 +7,7 @@ import { createProduct } from '../../../src/utils/api';
 export default function AddProductModal({ onClose, onProductAdded }) {
   const [formData, setFormData] = useState({
     name: '',
+    brandName: '',
     description: '',
     category: '',
     subcategory: '',
@@ -23,6 +24,7 @@ export default function AddProductModal({ onClose, onProductAdded }) {
     try {
       const data = new FormData();
       data.append('name', formData.name);
+      data.append('brandName', formData.brandName);
       data.append('description', formData.description);
       data.append('category', formData.category);
       data.append('subcategory', formData.subcategory);
@@ -46,9 +48,9 @@ export default function AddProductModal({ onClose, onProductAdded }) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md border-t-4 border-yellow-500"
+        className="bg-white rounded-xl shadow-2xl w-full max-w-4xl border-t-4 border-yellow-500"
       >
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center p-6 border-b border-gray-200">
           <h2 className="text-2xl font-bold text-gray-800">Add New Product</h2>
           <button 
             onClick={onClose}
@@ -60,66 +62,87 @@ export default function AddProductModal({ onClose, onProductAdded }) {
           </button>
         </div>
         
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Product Name</label>
-            <input
-              type="text"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 focus:outline-none transition-colors"
-              required
-              placeholder="Enter product name"
-            />
-          </div>
+        <form onSubmit={handleSubmit} className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Left Column */}
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Product Name</label>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 focus:outline-none transition-colors"
+                  required
+                  placeholder="Enter product name"
+                />
+              </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea
-              value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 focus:outline-none transition-colors"
-              rows={3}
-              required
-              placeholder="Enter product description"
-            />
-          </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Brand Name</label>
+                <input
+                  type="text"
+                  value={formData.brandName}
+                  onChange={(e) => setFormData({ ...formData, brandName: e.target.value })}
+                  className="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 focus:outline-none transition-colors"
+                  required
+                  placeholder="Enter brand name"
+                />
+              </div>
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-            <div className="relative">
-              <select
-                value={formData.category}
-                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                className="block w-full appearance-none rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 focus:outline-none transition-colors pr-10"
-                required
-              >
-                <option value="">Select a category</option>
-                <option value="battery">Battery</option>
-                <option value="tyre">Tyre</option>
-                <option value="wheel">Wheel</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
+            {/* Right Column */}
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <div className="relative">
+                  <select
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    className="block w-full appearance-none rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 focus:outline-none transition-colors pr-10"
+                    required
+                  >
+                    <option value="">Select a category</option>
+                    <option value="battery">Battery</option>
+                    <option value="tyre">Tyre</option>
+                    <option value="wheel">Wheel</option>
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Subcategory</label>
+                <input
+                  type="text"
+                  value={formData.subcategory}
+                  onChange={(e) => setFormData({ ...formData, subcategory: e.target.value })}
+                  className="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 focus:outline-none transition-colors"
+                  required
+                  placeholder="Enter subcategory (e.g. PCR, OTR, UPS)"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  className="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 focus:outline-none transition-colors"
+                  rows={4}
+                  required
+                  placeholder="Enter product description"
+                />
               </div>
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Subcategory</label>
-            <input
-              type="text"
-              value={formData.subcategory}
-              onChange={(e) => setFormData({ ...formData, subcategory: e.target.value })}
-              className="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 focus:outline-none transition-colors"
-              required
-              placeholder="Enter subcategory (e.g. PCR, OTR, UPS)"
-            />
-          </div>
-
-          <div>
+          {/* Image Upload Section */}
+          <div className="mt-6">
             <label className="block text-sm font-medium text-gray-700 mb-1">Product Image</label>
             <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-yellow-500 transition-colors">
               <div className="space-y-1 text-center">
@@ -150,7 +173,7 @@ export default function AddProductModal({ onClose, onProductAdded }) {
           </div>
 
           {error && (
-            <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div className="mt-6 bg-red-50 border-l-4 border-red-500 p-4 rounded">
               <div className="flex">
                 <div className="flex-shrink-0">
                   <svg className="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -164,7 +187,7 @@ export default function AddProductModal({ onClose, onProductAdded }) {
             </div>
           )}
 
-          <div className="flex justify-end space-x-3 mt-8">
+          <div className="mt-8 flex justify-end space-x-3">
             <button
               type="button"
               onClick={onClose}

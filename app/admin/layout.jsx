@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Image from 'next/image';
+import AdminNav from './components/AdminNav';
 
 export default function AdminLayout({ children }) {
   const router = useRouter();
@@ -38,9 +39,15 @@ export default function AdminLayout({ children }) {
   return (
     <div className="min-h-screen bg-gray-50">
       {pathname !== '/admin/login' && (
-        <div className="bg-yellow-500 h-1 w-full fixed top-0 z-50"></div>
+        <>
+          <div className="bg-yellow-500 h-1 w-full fixed top-0 z-50"></div>
+          <AdminNav />
+          <main className="pt-16">
+            {children}
+          </main>
+        </>
       )}
-      {children}
+      {pathname === '/admin/login' && children}
     </div>
   );
 }

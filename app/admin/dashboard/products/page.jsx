@@ -1,11 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { getProducts, deleteProduct } from '../../../src/utils/api';
-import AddProductModal from '../components/AddProductModal';
-import EditProductModal from '../components/EditProductModal';
+import { motion } from 'framer-motion';
+import { getProducts, deleteProduct } from '../../../../src/utils/api';
+import AddProductModal from '../../components/AddProductModal';
+import EditProductModal from '../../components/EditProductModal';
 
 // Helper function to format category names for display
 const formatCategoryName = (category) => {
@@ -21,9 +20,7 @@ const formatCategoryName = (category) => {
   return categoryMap[category] || category.charAt(0).toUpperCase() + category.slice(1);
 };
 
-export default function AdminDashboard() {
-  const router = useRouter();
-  const [adminData, setAdminData] = useState(null);
+export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -32,19 +29,6 @@ export default function AdminDashboard() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [filterCategory, setFilterCategory] = useState('');
 
-  useEffect(() => {
-    const data = localStorage.getItem('adminData');
-    if (data) {
-      setAdminData(JSON.parse(data));
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('adminToken');
-    localStorage.removeItem('adminData');
-    router.push('/admin/login');
-  };
-  
   const fetchProducts = async () => {
     try {
       const response = await getProducts();
@@ -83,6 +67,14 @@ export default function AdminDashboard() {
   const filteredProducts = filterCategory 
     ? products.filter(product => product.category === filterCategory)
     : products;
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-100">
@@ -248,4 +240,4 @@ export default function AdminDashboard() {
       )}
     </div>
   );
-}
+} 
