@@ -251,6 +251,14 @@ export default function ProductDetailClient() {
                   >
                     {product.category}
                   </motion.div>
+                  <motion.h2 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.35 }}
+                    className="text-2xl font-bold text-amber-600 mb-2"
+                  >
+                    {product.brandName}
+                  </motion.h2>
                   <motion.h1 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}

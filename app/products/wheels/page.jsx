@@ -184,6 +184,7 @@ export default function WheelsPage() {
                             />
                           </div>
                           <div className="mt-2 text-center">
+                            <p className="text-sm font-semibold text-amber-600 group-hover:text-amber-700 transition-colors">{product.brandName}</p>
                             <p className="text-xs text-gray-900 group-hover:text-amber-600 transition-colors">{product.name}</p>
                             <p className="text-xs text-gray-500">{product.subcategory}</p>
                           </div>
