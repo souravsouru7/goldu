@@ -60,9 +60,9 @@ export default function AddEventModal({ onClose, onEventAdded }) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="bg-white rounded-xl shadow-2xl p-4 sm:p-6 md:p-8 w-full max-w-4xl mx-4 sm:mx-6 md:mx-8 lg:mx-auto border-t-4 border-yellow-500"
+        className="bg-white rounded-xl shadow-2xl w-full max-w-4xl mx-4 sm:mx-6 md:mx-8 lg:mx-auto border-t-4 border-yellow-500 flex flex-col max-h-[90vh]"
       >
-        <div className="flex justify-between items-center mb-4 sm:mb-6 md:mb-8">
+        <div className="flex justify-between items-center p-4 sm:p-6 border-b border-gray-200 flex-shrink-0">
           <div>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">Add New Event</h2>
             <p className="text-sm sm:text-base text-gray-600 mt-1">Fill in the details to create a new event</p>
@@ -77,7 +77,7 @@ export default function AddEventModal({ onClose, onEventAdded }) {
           </button>
         </div>
         
-        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 overflow-y-auto flex-grow">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {/* Left Column */}
             <div className="space-y-4 sm:space-y-6">
@@ -238,7 +238,7 @@ export default function AddEventModal({ onClose, onEventAdded }) {
             </div>
           )}
 
-          <div className="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-3 mt-6 sm:mt-8">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-3 flex-shrink-0">
             <button
               type="button"
               onClick={onClose}
