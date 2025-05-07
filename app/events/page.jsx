@@ -87,61 +87,73 @@ export default function EventsPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center py-12"
+              className="text-center py-16 bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-12 shadow-lg"
             >
-              <div className="w-24 h-24 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <FiCalendar className="w-12 h-12 text-amber-600" />
+              <div className="w-32 h-32 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-8 transform hover:scale-105 transition-transform duration-300">
+                <FiCalendar className="w-16 h-16 text-white" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Coming Soon</h2>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-orange-600">
+                Coming Soon
+              </h2>
+              <p className="text-gray-600 text-xl max-w-2xl mx-auto leading-relaxed">
                 We're preparing something exciting for you. Stay tuned for our upcoming events and announcements.
               </p>
+              <div className="mt-8 flex justify-center space-x-4">
+                <div className="w-3 h-3 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
+                <div className="w-3 h-3 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-3 h-3 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+              </div>
             </motion.div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               {events.map((event, index) => (
                 <motion.div
                   key={event._id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+                  className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
                   onClick={() => window.location.href = `/events/${event._id}`}
                 >
-                  {event.media && event.media.length > 0 && (
-                    <div className="relative h-48">
+                  {event.image && (
+                    <div className="relative h-64">
                       <img
-                        src={event.media[0]}
+                        src={event.image}
                         alt={event.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <h3 className="text-2xl font-bold text-white mb-2">{event.name}</h3>
+                        <p className="text-gray-200">{event.location}</p>
+                      </div>
                     </div>
                   )}
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{event.name}</h3>
-                    <div className="space-y-3">
-                      <p className="flex items-center text-gray-600">
-                        <FiMapPin className="w-5 h-5 mr-2 text-amber-500" />
-                        {event.location}
-                      </p>
-                      <p className="flex items-center text-gray-600">
-                        <FiCalendar className="w-5 h-5 mr-2 text-amber-500" />
-                        {new Date(event.dateTime).toLocaleString()}
-                      </p>
+                  <div className="p-8">
+                    <div className="space-y-4">
+                      <div className="flex items-center text-gray-700 bg-amber-50 p-3 rounded-xl">
+                        <FiCalendar className="w-6 h-6 mr-3 text-amber-500" />
+                        <span className="font-medium">{new Date(event.dateTime).toLocaleString()}</span>
+                      </div>
                       {event.hasTicket && (
-                        <p className="flex items-center text-gray-600">
-                          <FiDollarSign className="w-5 h-5 mr-2 text-amber-500" />
-                          Ticket Price: ${event.ticketPrice}
-                        </p>
+                        <div className="flex items-center text-gray-700 bg-amber-50 p-3 rounded-xl">
+                          <FiDollarSign className="w-6 h-6 mr-3 text-amber-500" />
+                          <span className="font-medium">Ticket Price: ${event.ticketPrice}</span>
+                        </div>
                       )}
                       {event.sponsoredBy && (
-                        <p className="flex items-center text-gray-600">
-                          <FiUsers className="w-5 h-5 mr-2 text-amber-500" />
-                          Sponsored by: {event.sponsoredBy}
-                        </p>
+                        <div className="flex items-center text-gray-700 bg-amber-50 p-3 rounded-xl">
+                          <FiUsers className="w-6 h-6 mr-3 text-amber-500" />
+                          <span className="font-medium">Sponsored by: {event.sponsoredBy}</span>
+                        </div>
                       )}
                     </div>
-                    <p className="mt-4 text-gray-600 line-clamp-3">{event.description}</p>
+                    <p className="mt-6 text-gray-600 text-lg leading-relaxed">{event.description}</p>
+                    <div className="mt-6 flex justify-end">
+                      <button className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-xl font-medium hover:from-amber-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105">
+                        View Details
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               ))}

@@ -93,6 +93,16 @@ export default function ProductDetailClient() {
     setIsModalOpen(false);
   };
 
+  const getCategoryPath = (category) => {
+    // Map the category to the correct URL path
+    const categoryMap = {
+      'tyre': 'tyres',
+      'wheel': 'wheels',
+      'battery': 'batteries'
+    };
+    return `/products/${categoryMap[category.toLowerCase()] || category.toLowerCase()}`;
+  };
+
   if (loading) {
     return (
       <Layout>
@@ -158,7 +168,7 @@ export default function ProductDetailClient() {
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <Link 
-                href="/products" 
+                href={getCategoryPath(product.category)}
                 className="inline-flex items-center text-gray-700 hover:text-amber-600 transition-colors group"
               >
                 <FiArrowLeft className="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />

@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import Layout from '../../components/Layout';
-import { motion } from 'framer-motion';
-import { FiCalendar, FiMapPin, FiDollarSign, FiUsers, FiClock, FiArrowLeft } from 'react-icons/fi';
-import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiCalendar, FiMapPin, FiDollarSign, FiUsers, FiArrowLeft, FiClock, FiShare2, FiHeart } from 'react-icons/fi';
 import { getEventById } from '../../../src/utils/api';
-import Image from 'next/image';
+import Link from 'next/link';
 
 export default function EventDetailsPage() {
   const { id } = useParams();
+  const router = useRouter();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -20,15 +20,7 @@ export default function EventDetailsPage() {
       try {
         const response = await getEventById(id);
         if (response.success) {
-          // Process media URLs to ensure they are absolute
-          const processedEvent = {
-            ...response.data,
-            media: response.data.media?.map(mediaUrl => {
-              if (mediaUrl.startsWith('http')) return mediaUrl;
-              return `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}${mediaUrl}`;
-            })
-          };
-          setEvent(processedEvent);
+          setEvent(response.data);
         } else {
           setError(response.error || 'Failed to fetch event details');
         }
@@ -78,17 +70,10 @@ export default function EventDetailsPage() {
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Event Not Found</h2>
-            <p className="text-gray-600 mb-8">The event you're looking for doesn't exist or has been removed.</p>
-            <Link href="/events">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-xl font-semibold shadow-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300"
-              >
-                <FiArrowLeft className="mr-2" />
-                Back to Events
-              </motion.button>
+            <h2 className="text-2xl font-bold text-gray-900">Event not found</h2>
+            <Link href="/events" className="mt-4 inline-flex items-center text-amber-600 hover:text-amber-700">
+              <FiArrowLeft className="mr-2" />
+              Back to Events
             </Link>
           </div>
         </div>
@@ -98,122 +83,191 @@ export default function EventDetailsPage() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Hero Section with Event Image */}
-        <div className="relative h-[60vh] min-h-[400px]">
-          {event?.media && event.media.length > 0 ? (
-            <div className="relative w-full h-full">
-              <Image
-                src={event.media[0]}
-                alt={event.name}
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                onError={(e) => {
-                  e.target.src = '/images/event-placeholder.jpg';
-                }}
-              />
-            </div>
-          ) : (
-            <div className="w-full h-full bg-gradient-to-r from-yellow-400 to-yellow-600" />
-          )}
-          <div className="absolute inset-0 bg-black bg-opacity-40" />
-          <div className="absolute inset-0 flex items-center">
-            <div className="container mx-auto px-4">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="max-w-3xl"
-              >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-                  {event?.name}
-                </h1>
-                <div className="flex flex-wrap gap-4 text-white">
-                  <div className="flex items-center">
-                    <FiCalendar className="w-5 h-5 mr-2" />
-                    <span>{new Date(event?.dateTime).toLocaleDateString()}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <FiClock className="w-5 h-5 mr-2" />
-                    <span>{new Date(event?.dateTime).toLocaleTimeString()}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <FiMapPin className="w-5 h-5 mr-2" />
-                    <span>{event?.location}</span>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-amber-50">
+        <div className="max-w-[1920px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="px-8 py-6"
+          >
+            <Link href="/events" className="inline-flex items-center text-amber-600 hover:text-amber-700 group">
+              <FiArrowLeft className="mr-2 transform group-hover:-translate-x-1 transition-transform" />
+              Back to Events
+            </Link>
+          </motion.div>
+
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              {event.image && (
+                <div className="relative h-[70vh] w-full">
+                  <img
+                    src={event.image}
+                    alt={event.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-12 text-white">
+                    <motion.h1 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="text-6xl font-bold mb-6"
+                    >
+                      {event.name}
+                    </motion.h1>
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      className="flex items-center space-x-8 text-lg"
+                    >
+                      <span className="flex items-center">
+                        <FiClock className="mr-2" />
+                        {new Date(event.dateTime).toLocaleString()}
+                      </span>
+                      <span className="flex items-center">
+                        <FiMapPin className="mr-2" />
+                        {event.location}
+                      </span>
+                    </motion.div>
                   </div>
                 </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
+              )}
 
-        {/* Event Details */}
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Main Content */}
-              <div className="md:col-span-2">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="bg-white rounded-2xl shadow-xl p-8"
-                >
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">About This Event</h2>
-                  <div className="prose prose-lg max-w-none">
-                    <p className="text-gray-600 whitespace-pre-line">{event?.description}</p>
+              <div className="px-8 md:px-16 lg:px-24 py-16">
+                <div className="flex justify-between items-start mb-16">
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-6 text-gray-600 mb-8">
+                      <span className="flex items-center">
+                        <FiClock className="mr-2" />
+                        {new Date(event.dateTime).toLocaleString()}
+                      </span>
+                      <span className="flex items-center">
+                        <FiMapPin className="mr-2" />
+                        {event.location}
+                      </span>
+                    </div>
                   </div>
-                </motion.div>
-              </div>
+                  <div className="flex space-x-4">
+                    <button className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                      <FiShare2 className="w-5 h-5 text-gray-600" />
+                    </button>
+                    <button className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                      <FiHeart className="w-5 h-5 text-gray-600" />
+                    </button>
+                  </div>
+                </div>
 
-              {/* Sidebar */}
-              <div className="space-y-6">
-                {/* Event Details */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="bg-white rounded-2xl shadow-xl p-6"
-                >
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Event Details</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center">
-                      <FiCalendar className="w-5 h-5 text-yellow-500 mr-3" />
-                      <div>
-                        <p className="text-sm text-gray-500">Date</p>
-                        <p className="text-gray-900">{new Date(event?.dateTime).toLocaleDateString()}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <FiClock className="w-5 h-5 text-yellow-500 mr-3" />
-                      <div>
-                        <p className="text-sm text-gray-500">Time</p>
-                        <p className="text-gray-900">{new Date(event?.dateTime).toLocaleTimeString()}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <FiMapPin className="w-5 h-5 text-yellow-500 mr-3" />
-                      <div>
-                        <p className="text-sm text-gray-500">Location</p>
-                        <p className="text-gray-900">{event?.location}</p>
-                      </div>
-                    </div>
-                    {event?.sponsoredBy && (
-                      <div className="flex items-center">
-                        <FiUsers className="w-5 h-5 text-yellow-500 mr-3" />
-                        <div>
-                          <p className="text-sm text-gray-500">Sponsored By</p>
-                          <p className="text-gray-900">{event.sponsoredBy}</p>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                  <div className="space-y-8">
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="bg-amber-50/50 backdrop-blur-sm rounded-3xl p-8 hover:shadow-lg transition-shadow"
+                    >
+                      <div className="flex items-start">
+                        <div className="bg-amber-100 p-4 rounded-2xl">
+                          <FiCalendar className="w-8 h-8 text-amber-600" />
+                        </div>
+                        <div className="ml-6">
+                          <h3 className="text-2xl font-semibold text-gray-900">Date & Time</h3>
+                          <p className="text-gray-600 mt-2 text-lg">{new Date(event.dateTime).toLocaleString()}</p>
                         </div>
                       </div>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="bg-amber-50/50 backdrop-blur-sm rounded-3xl p-8 hover:shadow-lg transition-shadow"
+                    >
+                      <div className="flex items-start">
+                        <div className="bg-amber-100 p-4 rounded-2xl">
+                          <FiMapPin className="w-8 h-8 text-amber-600" />
+                        </div>
+                        <div className="ml-6">
+                          <h3 className="text-2xl font-semibold text-gray-900">Location</h3>
+                          <p className="text-gray-600 mt-2 text-lg">{event.location}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {event.hasTicket && (
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="bg-amber-50/50 backdrop-blur-sm rounded-3xl p-8 hover:shadow-lg transition-shadow"
+                      >
+                        <div className="flex items-start">
+                          <div className="bg-amber-100 p-4 rounded-2xl">
+                            <FiDollarSign className="w-8 h-8 text-amber-600" />
+                          </div>
+                          <div className="ml-6">
+                            <h3 className="text-2xl font-semibold text-gray-900">Ticket Price</h3>
+                            <p className="text-gray-600 mt-2 text-lg">${event.ticketPrice}</p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {event.sponsoredBy && (
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5 }}
+                        className="bg-amber-50/50 backdrop-blur-sm rounded-3xl p-8 hover:shadow-lg transition-shadow"
+                      >
+                        <div className="flex items-start">
+                          <div className="bg-amber-100 p-4 rounded-2xl">
+                            <FiUsers className="w-8 h-8 text-amber-600" />
+                          </div>
+                          <div className="ml-6">
+                            <h3 className="text-2xl font-semibold text-gray-900">Sponsored By</h3>
+                            <p className="text-gray-600 mt-2 text-lg">{event.sponsoredBy}</p>
+                          </div>
+                        </div>
+                      </motion.div>
                     )}
                   </div>
-                </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="bg-gray-50/50 backdrop-blur-sm rounded-3xl p-12"
+                  >
+                    <h3 className="text-3xl font-semibold text-gray-900 mb-8">About the Event</h3>
+                    <p className="text-gray-600 leading-relaxed text-lg">{event.description}</p>
+                  </motion.div>
+                </div>
+
+                {event.hasTicket && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 }}
+                    className="mt-16 text-center"
+                  >
+                    <button 
+                      onClick={() => router.push('/ConductUs')}
+                      className="px-16 py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xl font-semibold rounded-2xl hover:from-amber-600 hover:to-amber-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    >
+                      Get Tickets Now
+                    </button>
+                  </motion.div>
+                )}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </Layout>

@@ -9,6 +9,8 @@ export const loginAdmin = async (username, password) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ username, password }),
+      mode: 'cors',
+      credentials: 'include',
     });
 
     const data = await response.json();
@@ -304,7 +306,7 @@ export const createEvent = async (formData) => {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
-      body: formData,
+      body: formData, // FormData for file upload
     });
 
     const data = await response.json();
@@ -405,7 +407,7 @@ export const updateEvent = async (id, formData) => {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
-      body: formData,
+      body: formData, // FormData for file upload
     });
 
     const data = await response.json();

@@ -62,7 +62,7 @@ export default function AddProductModal({ onClose, onProductAdded }) {
           </button>
         </div>
         
-        <form onSubmit={handleSubmit} className="p-4 sm:p-6 overflow-y-auto flex-grow">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 overflow-y-auto flex-grow scroll-smooth">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {/* Left Column */}
             <div className="space-y-4 sm:space-y-6">

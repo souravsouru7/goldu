@@ -133,10 +133,10 @@ const EventsSection = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
               >
-                {event.media && event.media.length > 0 && (
+                {event.image && (
                   <div className="relative h-48">
                     <img
-                      src={event.media[0]}
+                      src={event.image}
                       alt={event.name}
                       className="w-full h-full object-cover"
                     />
@@ -167,6 +167,18 @@ const EventsSection = () => {
                     )}
                   </div>
                   <p className="mt-4 text-gray-600 line-clamp-3">{event.description}</p>
+                  <div className="mt-6">
+                    <Link href={`/events/${event._id}`}>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-full inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-xl font-semibold shadow-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 group"
+                      >
+                        <span>Know More</span>
+                        <FiArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform duration-300" />
+                      </motion.button>
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             ))}

@@ -28,6 +28,7 @@ export default function ProductsPage() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [filterCategory, setFilterCategory] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchProducts = async () => {
     try {
@@ -63,10 +64,14 @@ export default function ProductsPage() {
   // Get unique categories for filter
   const categories = [...new Set(products.map(product => product.category))];
   
-  // Filter products by category if filter is set
-  const filteredProducts = filterCategory 
-    ? products.filter(product => product.category === filterCategory)
-    : products;
+  // Filter products by category and search query
+  const filteredProducts = products.filter(product => {
+    const matchesCategory = !filterCategory || product.category === filterCategory;
+    const matchesSearch = !searchQuery || 
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   if (loading) {
     return (
@@ -118,31 +123,58 @@ export default function ProductsPage() {
         </div>
 
         {/* Category Filter */}
-        <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border border-yellow-100 flex flex-wrap items-center gap-2">
-          <span className="text-sm font-medium text-gray-700 mr-2">Filter by:</span>
-          <button
-            onClick={() => setFilterCategory('')}
-            className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-200 ${
-              filterCategory === '' 
-                ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-sm' 
-                : 'bg-yellow-50 text-gray-700 hover:bg-yellow-100 border border-yellow-200'
-            }`}
-          >
-            All
-          </button>
-          {categories.map(category => (
-            <button
-              key={category}
-              onClick={() => setFilterCategory(category)}
-              className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-200 ${
-                filterCategory === category 
-                  ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-sm' 
-                  : 'bg-yellow-50 text-gray-700 hover:bg-yellow-100 border border-yellow-200'
-              }`}
-            >
-              {formatCategoryName(category)}
-            </button>
-          ))}
+        <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border border-yellow-100">
+          <div className="flex flex-col md:flex-row md:items-center gap-4">
+            <div className="flex-1">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full px-4 py-2 border border-yellow-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                />
+                <svg
+                  className="absolute right-3 top-2.5 h-5 w-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-sm font-medium text-gray-700">Filter by:</span>
+              <button
+                onClick={() => setFilterCategory('')}
+                className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-200 ${
+                  filterCategory === '' 
+                    ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-sm' 
+                    : 'bg-yellow-50 text-gray-700 hover:bg-yellow-100 border border-yellow-200'
+                }`}
+              >
+                All
+              </button>
+              {categories.map(category => (
+                <button
+                  key={category}
+                  onClick={() => setFilterCategory(category)}
+                  className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-200 ${
+                    filterCategory === category 
+                      ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-sm' 
+                      : 'bg-yellow-50 text-gray-700 hover:bg-yellow-100 border border-yellow-200'
+                  }`}
+                >
+                  {formatCategoryName(category)}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Error Message */}

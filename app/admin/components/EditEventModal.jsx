@@ -14,7 +14,7 @@ export default function EditEventModal({ event, onClose, onEventUpdated }) {
     description: event.description,
     sponsoredBy: event.sponsoredBy,
   });
-  const [selectedMedia, setSelectedMedia] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -35,10 +35,8 @@ export default function EditEventModal({ event, onClose, onEventUpdated }) {
       data.append('description', formData.description);
       data.append('sponsoredBy', formData.sponsoredBy);
       
-      if (selectedMedia.length > 0) {
-        selectedMedia.forEach((file) => {
-          data.append('media', file);
-        });
+      if (selectedImage) {
+        data.append('image', selectedImage);
       }
 
       const response = await updateEvent(event._id, data);
@@ -50,9 +48,11 @@ export default function EditEventModal({ event, onClose, onEventUpdated }) {
     }
   };
 
-  const handleMediaChange = (e) => {
-    const files = Array.from(e.target.files);
-    setSelectedMedia(files);
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedImage(file);
+    }
   };
 
   return (
@@ -141,12 +141,12 @@ export default function EditEventModal({ event, onClose, onEventUpdated }) {
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Ticket Price</label>
                       <div className="relative">
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">AED</span>
                         <input
                           type="number"
                           value={formData.ticketPrice}
                           onChange={(e) => setFormData({ ...formData, ticketPrice: e.target.value })}
-                          className="block w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 focus:outline-none transition-colors"
+                          className="block w-full rounded-lg border border-gray-300 pl-12 pr-4 py-3 text-gray-900 focus:border-yellow-500 focus:ring-yellow-500 focus:outline-none transition-colors"
                           required
                           min="0"
                           step="0.01"
@@ -188,7 +188,7 @@ export default function EditEventModal({ event, onClose, onEventUpdated }) {
               </div>
 
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">Event Media</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">Event Image</h3>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-yellow-500 transition-colors">
                   <div className="space-y-1 text-center">
                     <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -196,26 +196,25 @@ export default function EditEventModal({ event, onClose, onEventUpdated }) {
                     </svg>
                     <div className="flex text-sm text-gray-600">
                       <label className="relative cursor-pointer bg-white rounded-md font-medium text-yellow-600 hover:text-yellow-700 focus-within:outline-none">
-                        <span>Upload files</span>
+                        <span>Upload image</span>
                         <input 
                           type="file" 
                           className="sr-only" 
-                          onChange={handleMediaChange}
-                          accept="image/*,video/*"
-                          multiple
+                          onChange={handleImageChange}
+                          accept="image/*"
                         />
                       </label>
                       <p className="pl-1">or drag and drop</p>
                     </div>
-                    <p className="text-xs text-gray-500">PNG, JPG, GIF, MP4 up to 50MB</p>
-                    {selectedMedia.length > 0 && (
+                    <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                    {selectedImage && (
                       <p className="text-sm text-green-600 font-medium">
-                        {selectedMedia.length} file(s) selected
+                        New image selected: {selectedImage.name}
                       </p>
                     )}
-                    {!selectedMedia.length && (
-                      <p className="text-xs text-gray-500 italic">
-                        Current media will be kept if no new files are selected
+                    {!selectedImage && event.image && (
+                      <p className="text-sm text-gray-600">
+                        Current image will be kept if no new image is selected
                       </p>
                     )}
                   </div>
