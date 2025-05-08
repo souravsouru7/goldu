@@ -19,6 +19,7 @@ export default function TyresPage() {
   const [subCategories, setSubCategories] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const productsPerPage = 10;
 
   useEffect(() => {
@@ -75,10 +76,10 @@ export default function TyresPage() {
     <Layout>
       <div className="relative min-h-screen bg-white">
         {/* Header Section */}
-        <div className="relative py-8">
+        <div className="relative py-4 md:py-8">
           <div className="container mx-auto px-4">
             <div className="max-w-7xl mx-auto">
-              <div className="mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <Link 
                   href="/products" 
                   className="inline-flex items-center text-amber-600 hover:text-amber-700 group"
@@ -86,15 +87,23 @@ export default function TyresPage() {
                   <FiArrowLeft className="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
                   <span className="font-medium">Back to All Products</span>
                 </Link>
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="md:hidden bg-amber-600 text-white p-2 rounded-lg"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
         </div>
 
         <div className="container mx-auto px-4">
-          <div className="flex gap-8">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8">
             {/* Sidebar Navigation */}
-            <div className="w-64 flex-shrink-0">
+            <div className={`w-full md:w-64 flex-shrink-0 ${isMobileMenuOpen ? 'block' : 'hidden'} md:block`}>
               <div className="bg-white rounded-lg shadow-sm p-4 sticky top-4">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Categories</h3>
                 <div className="space-y-2">
@@ -121,7 +130,10 @@ export default function TyresPage() {
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-4">Subcategories</h3>
                 <div className="space-y-2">
                   <button
-                    onClick={() => setSelectedCategory('all')}
+                    onClick={() => {
+                      setSelectedCategory('all');
+                      setIsMobileMenuOpen(false);
+                    }}
                     className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                       selectedCategory === 'all'
                         ? 'bg-amber-600 text-white'
@@ -133,7 +145,10 @@ export default function TyresPage() {
                   {categories.map((category) => (
                     <button
                       key={category}
-                      onClick={() => setSelectedCategory(category)}
+                      onClick={() => {
+                        setSelectedCategory(category);
+                        setIsMobileMenuOpen(false);
+                      }}
                       className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                         selectedCategory === category
                           ? 'bg-amber-600 text-white'
@@ -165,7 +180,7 @@ export default function TyresPage() {
                   </div>
                 ) : (
                   <>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                       {displayedProducts.map((product) => (
                         <div 
                           key={product._id}
@@ -177,7 +192,7 @@ export default function TyresPage() {
                               alt={product.name}
                               fill
                               className="object-contain group-hover:opacity-90 transition-opacity"
-                              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 14vw"
+                              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 14vw"
                               unoptimized
                             />
                           </div>

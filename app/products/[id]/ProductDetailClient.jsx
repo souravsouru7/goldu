@@ -328,11 +328,11 @@ export default function ProductDetailClient() {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={handleViewDetails}
+                    onClick={() => router.push('/ConductUs')}
                     className="w-full bg-amber-600 hover:bg-amber-700 text-white py-4 px-8 rounded-2xl shadow-lg transition-colors duration-300 flex items-center justify-center space-x-2 font-medium text-lg"
                   >
-                    <FiInfo className="w-5 h-5" />
-                    <span>View Full Details</span>
+                    <FiShoppingCart className="w-5 h-5" />
+                    <span>Enquire Now</span>
                   </motion.button>
                 </motion.div>
               </motion.div>
