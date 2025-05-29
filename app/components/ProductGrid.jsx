@@ -177,7 +177,7 @@ const ProductGrid = ({ activeCategory, searchQuery }) => {
       product.description?.toLowerCase().includes(searchQuery.toLowerCase());
     
     return matchesCategory && matchesSubcategory && matchesSearch;
-  });
+  }).slice(0, 4); // Limit to 4 products
 
   if (loading) {
     return (
