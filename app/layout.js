@@ -1,14 +1,15 @@
+'use client';
+
 import "./globals.css";
 import ScrollToTop from './components/ScrollToTop';
 import FloatingContactIcons from './components/FloatingContactIcons';
 import LoadingScreen from './components/LoadingScreen';
-
-export const metadata = {
-  title: "Golden Extreme Auto Spare Parts",
-  description: "Your trusted partner in tire and wheel solutions",
-};
+import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+  const isAdminPage = pathname.startsWith('/admin');
+
   return (
     <html lang="en">
       <head>
@@ -21,7 +22,7 @@ export default function RootLayout({ children }) {
           {children}
         </main>
         <ScrollToTop />
-        <FloatingContactIcons />
+        {!isAdminPage && <FloatingContactIcons />}
       </body>
     </html>
   );

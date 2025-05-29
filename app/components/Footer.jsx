@@ -4,8 +4,12 @@ import React from 'react';
 import Link from 'next/link';
 import { FaInstagram, FaFacebookF, FaLinkedinIn, FaTruck, FaHeadset, FaShieldAlt, FaWhatsapp, FaPhone } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
+  const pathname = usePathname();
+  const isAdminPage = pathname.startsWith('/admin');
+
   const socialLinks = [
     { 
       icon: FaInstagram, 
@@ -46,12 +50,14 @@ const Footer = () => {
       href: 'tel:+97142229799',
       isEmoji: false
     },
-    { 
-      icon: FaWhatsapp, 
-      text: '+971586498398',
-      href: 'https://wa.me/971586498398',
-      isEmoji: false
-    }
+    ...(isAdminPage ? [] : [
+      { 
+        icon: FaWhatsapp, 
+        text: '+971586498398',
+        href: 'https://wa.me/971586498398',
+        isEmoji: false
+      }
+    ])
   ];
 
   return (
