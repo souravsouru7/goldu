@@ -69,7 +69,7 @@ export const getProducts = async () => {
     clearTimeout(timeoutId);
     console.log('Fetch completed, response status:', response?.status);
 
-    // If the response object is not a valid response (failed fetch)
+
     if (!response || !response.ok) {
       console.error('Failed response:', response?.status, response?.statusText);
       return {

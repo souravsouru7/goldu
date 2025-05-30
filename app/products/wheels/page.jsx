@@ -228,6 +228,62 @@ export default function WheelsPage() {
                   </>
                 )}
               </div>
+              {/* Add the new table here */}
+              <div className="mt-12 bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+                <h3 className="text-2xl font-bold text-gray-800 mb-6">Wheel Specifications</h3>
+                <div className="overflow-x-auto rounded-lg border border-gray-200">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-amber-700">
+                      <tr>
+                        <th scope="col" className="px-3 py-2 md:px-6 md:py-4 text-left text-sm font-bold text-white uppercase tracking-wider">SIZE</th>
+                        <th scope="col" className="px-3 py-2 md:px-6 md:py-4 text-left text-sm font-bold text-white uppercase tracking-wider">INSET [MM]</th>
+                        <th scope="col" className="px-3 py-2 md:px-6 md:py-4 text-left text-sm font-bold text-white uppercase tracking-wider">OUTSET [MM]</th>
+                        <th scope="col" className="px-3 py-2 md:px-6 md:py-4 text-left text-sm font-bold text-white uppercase tracking-wider">BOLT HOLES</th>
+                        <th scope="col" className="px-3 py-2 md:px-6 md:py-4 text-left text-sm font-bold text-white uppercase tracking-wider">BOLT HOLE CIRCLE [MM]</th>
+                        <th scope="col" className="px-3 py-2 md:px-6 md:py-4 text-left text-sm font-bold text-white uppercase tracking-wider">BOLT HOLE DIAMETER [MM]</th>
+                        <th scope="col" className="px-3 py-2 md:px-6 md:py-4 text-left text-sm font-bold text-white uppercase tracking-wider">CENTER BORE [MM]</th>
+                        <th scope="col" className="px-3 py-2 md:px-6 md:py-4 text-left text-sm font-bold text-white uppercase tracking-wider">MAX LOAD [KG]</th>
+                        <th scope="col" className="px-3 py-2 md:px-6 md:py-4 text-left text-sm font-bold text-white uppercase tracking-wider">WEIGHT [KG]</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-gray-50 divide-y divide-gray-200">
+                      <tr className="hover:bg-gray-100 transition-colors">
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm font-medium text-gray-800">1.75 X 6.00</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">109</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">128</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">6</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">205</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">21</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">161</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">2350</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">12.4</td>
+                      </tr>
+                      <tr className="hover:bg-gray-100 transition-colors">
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm font-medium text-gray-800">22.5 X 11.75</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">120</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">146.3</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">10</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">335</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">26</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">281.5</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">4500</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">24.5</td>
+                      </tr>
+                      <tr className="hover:bg-gray-100 transition-colors">
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm font-medium text-gray-800">22.5 X 9.00</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">152.6</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">175</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">10</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">335</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">32.5</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">281.2</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">4125</td>
+                        <td className="px-3 py-2 md:px-6 md:py-4 whitespace-nowrap text-sm text-gray-600">23.8</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
