@@ -229,7 +229,7 @@ export default function WheelsPage() {
                 )}
               </div>
               {/* Add the new table here */}
-              <div className="mt-12 bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <div className="mt-12 bg-white rounded-lg shadow-lg p-4 border border-gray-200">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">Wheel Specifications</h3>
                 <div className="overflow-x-auto rounded-lg border border-gray-200">
                   <table className="min-w-full divide-y divide-gray-200">
